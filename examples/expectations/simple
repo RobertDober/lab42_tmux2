@@ -1,0 +1,3 @@
+has-session -t simple
+source-file /home/robert/.tmux.conf
+new-session -d -s simple -n sh
