@@ -1,6 +1,5 @@
-
 module Lab42
   module Tmux
-    VERSION = '0.0.1pre'
+    NoSessionDefined = Class.new RuntimeError
   end # module Tmux
 end # module Lab42

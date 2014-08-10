@@ -1,4 +1,5 @@
 require_relative 'tmux/config'
+require_relative 'tmux/interface'
 require_relative 'tmux/session'
 
 module Lab42
@@ -12,3 +13,7 @@ module Lab42
     
   end # module Tmux
 end # module Lab42
+
+at_exit do
+  Lab42::Tmux::Session.run
+end
