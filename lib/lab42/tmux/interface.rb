@@ -2,6 +2,7 @@ module Lab42
   module Tmux
     module Interface extend self
       def command *args
+        p args
         %x{ tmux #{ args.join ' ' } }
       end
       def query *args

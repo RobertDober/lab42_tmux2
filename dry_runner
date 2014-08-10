@@ -14,7 +14,6 @@ function run_one_script
 
 PATH=.:$PATH
 ( rm tmp/* ) >/dev/null 2>&1
-export error_count=0
 
 if test -z "$*"
 then

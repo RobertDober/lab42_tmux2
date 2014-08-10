@@ -7,11 +7,17 @@ module Lab42
       attr_reader :commands, :name, :win_number
 
       def define block
-        instance_exec( &block )
+        @definition_block = block
+      end
+
+      def run!
+        run
+        run_registered_commands
       end
 
       def run
         create_session_and_windows unless running?
+        instance_exec( &@definition_block ) if @definition_block
         attach
       end
 
@@ -25,13 +31,15 @@ module Lab42
       end
 
       def attach
-        Interface.command 'attach-session', '-t', name
+        add_command 'attach-session', '-t', name
       end
 
+      def add_command *args
+        commands << args
+      end
       def create_session_and_windows
-        Interface.command 'source-file', File.join( ENV["HOME"], '.tmux.conf' )
-        Interface.command 'new-session', '-d', '-s', name, '-n', 'sh'
-        run_registered_commands
+        add_command 'source-file', File.join( ENV["HOME"], '.tmux.conf' )
+        add_command 'new-session', '-d', '-s', name, '-n', 'sh'
       end
 
       def running?

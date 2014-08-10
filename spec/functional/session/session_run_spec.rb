@@ -16,7 +16,7 @@ describe T::Session do
         stub_tmux_query session_name, false # as if the session does not exist
       end
 
-      it 'an empty session opens only one window' do
+      it 'an empty session opens only one window', :wip do
         session
         described_class.run
         expect( output ).to eq [
