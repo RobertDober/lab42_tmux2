@@ -8,7 +8,8 @@ module Lab42
     def new_session session_name=nil, &block
       raise ArgumentError, 'No block provided' unless block
       session = Session.new session || Config.session_name
-      session.run block
+      session.define block if block
+      session.run
     end
     
   end # module Tmux

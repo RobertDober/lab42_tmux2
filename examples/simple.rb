@@ -11,5 +11,4 @@ include T
 #
 
 new_session 'simple' do
-  new_window 'sh'
 end

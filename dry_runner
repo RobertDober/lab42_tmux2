@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+function run_one_script
+{
+        local test_name=${1}
+        local file_name=${test_name:t}
+        test_name=${file_name:r}
+        file_name=${test_name}.rb
+
+        ruby examples/$file_name
+
+}
+
+
+PATH=.:$PATH
+( rm tmp/* ) >/dev/null 2>&1
+export error_count=0
+
+if test -z "$*"
+then
+  for example in examples/*.rb
+  do
+          run_one_script ${example}
+  done
+else
+  for example
+  do
+          run_one_script ${example}
+  done
+fi

@@ -1,20 +1,63 @@
 require_relative 'errors'
+require_relative 'session/commands'
 
 module Lab42
   module Tmux
     class Session
-      attr_reader :name
+      attr_reader :commands, :name, :win_number
+
+      def define block
+        instance_exec( &block )
+      end
+
+      def run
+        create_session_and_windows unless running?
+        attach
+      end
 
       private
       def initialize sess_name
         @name = sess_name
+        @win_number = 0
+        @commands = []
+
         self.class.instance self
+      end
+
+      def attach
+        Interface.command 'attach-session', '-t', name
+      end
+
+      def create_session_and_windows
+        Interface.command 'source-file', File.join( ENV["HOME"], '.tmux.conf' )
+        Interface.command 'new-session', '-d', '-s', name, '-n', 'sh'
+        run_registered_commands
+      end
+
+      def running?
+        Interface.query 'has-session', '-t', name
+      end
+
+      def run_command command
+        case command
+        when String
+          Lab42::Tmux::Interface.command command
+        when Array
+          Lab42::Tmux::Interface.command( *command )
+        else
+          instance_exec( &command )
+        end
+      end
+
+      def run_registered_commands
+        commands.each do | command |
+          run_command command
+        end
       end
 
       class << self 
         def instance an_instance=nil
           return @instance unless an_instance
-          # raise RuntimeError, "there can only be on" if an_instance && @instance
           @instance = an_instance
         end
 
