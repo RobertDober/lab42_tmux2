@@ -1,4 +1,5 @@
-require_relative "../lib/lab42/tmux/auto_import"
+require_relative "../lib/lab42/tmux"
+T = Lab42::Tmux
 
 PROJECT_ROOT = File.expand_path "../..", __FILE__
 Dir[File.join(PROJECT_ROOT,"spec/support/**/*.rb")].each {|f| require f}

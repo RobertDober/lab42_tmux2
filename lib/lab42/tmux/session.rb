@@ -4,8 +4,12 @@ require_relative 'session/commands'
 module Lab42
   module Tmux
     class Session
-      attr_reader :commands, :name, :win_number
+      attr_reader :commands, :configuration, :name, :win_number
 
+      def config &block
+        block.( configuration )
+      end
+    
       def define block
         @definition_block = block
       end
@@ -26,6 +30,7 @@ module Lab42
         @name = sess_name
         @win_number = 0
         @commands = []
+        @configuration = Config.new
 
         self.class.instance self
       end
@@ -37,9 +42,11 @@ module Lab42
       def add_command *args
         commands << args
       end
+
       def create_session_and_windows
         add_command 'source-file', File.join( ENV["HOME"], '.tmux.conf' )
         add_command 'new-session', '-d', '-s', name, '-n', 'sh'
+        add_command 'set-window-option', '-g', 'automatic-rename', 'off' unless configuration.window_automatic_rename
       end
 
       def running?
@@ -70,7 +77,8 @@ module Lab42
         end
 
         def run
-          raise Lab42::Tmux::NoSessionDefined, "you need to define a session with `new_session` in your script" unless instance
+          raise Lab42::Tmux::NoSessionDefined, ["you need to define a session with `new_session` in your script",
+                                               "or did you forget to include Lab42::Tmux (Tmux or T) in your script?"].join( "\n" ) unless instance
           instance.run
         end
       end # class <<

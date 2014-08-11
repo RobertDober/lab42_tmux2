@@ -1,21 +1,23 @@
 require 'spec_helper'
 
-describe T::Session do 
+describe T::Session do
   context 'run' do 
-    context 'with session' do
+    context 'with configured session' do
       let( :session_name ){ 'my-sess' }
       let( :session ){ described_class.new session_name }
       
       before do
         stub_tmux_query session_name, false # as if the session does not exist
+        session.config{ |c| c.window_automatic_rename true }
       end
 
-      it 'an empty session opens only one window' do
+      it 'an empty session without automatic rename off' do
+
         session.run
         expect( session.commands.map(&join(' ')) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",
-          "set-window-option -g automatic-rename off",
+          # " set-window-option -g automatic-rename off",
           "attach-session -t #{session_name}" 
         ]
       end
@@ -28,7 +30,7 @@ describe T::Session do
         expect( session.commands.map(&join( ' ' )) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",
-          "set-window-option -g automatic-rename off",
+          # " set-window-option -g automatic-rename off",
           "new-window -t #{session_name} -n vi",
           "attach-session -t #{session_name}" 
         ]
@@ -44,7 +46,7 @@ describe T::Session do
         expect( session.commands.map(&join( ' ' )) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",
-          "set-window-option -g automatic-rename off",
+          # " set-window-option -g automatic-rename off",
           "new-window -t #{session_name} -n vi",
           "send-keys -t #{session_name}:1 \"vi .\" C-m",
           "send-keys -t #{session_name}:1 \":colorscheme morning\" C-m",

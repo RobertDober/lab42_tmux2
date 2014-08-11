@@ -11,10 +11,6 @@ module Lab42
       session.define block if block
       session.run!
     end
-    
+
   end # module Tmux
 end # module Lab42
-
-at_exit do
-  Lab42::Tmux::Session.run
-end
