@@ -5,6 +5,9 @@ module Lab42
         def session_address
           "-t #{name}"
         end
+        def window_address
+          "-t #{name}:#{win_number}"
+        end
       end # module ParameterHelpers
       include ParameterHelpers
     end # class Session

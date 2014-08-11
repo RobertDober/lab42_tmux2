@@ -1,0 +1,6 @@
+source-file /home/robert/.tmux.conf
+new-session -d -s two -n sh
+new-window -t two -n vi
+send-keys -t two:1 \vi .\ C-m
+send-keys -t two:1 ":colorschem morning" C-m
+attach-session -t two
