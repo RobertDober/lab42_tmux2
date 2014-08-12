@@ -12,5 +12,8 @@ module Lab42
       session.run!
     end
 
+    def dry_run!
+      require_relative 'tmux/dry_run'
+    end
   end # module Tmux
 end # module Lab42

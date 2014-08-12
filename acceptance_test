@@ -22,7 +22,6 @@ function run_one_test
 }
 
 
-PATH=.:$PATH
 ( rm tmp/* ) >/dev/null 2>&1
 export error_count=0
 

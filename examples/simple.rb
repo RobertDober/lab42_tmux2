@@ -1,7 +1,7 @@
 
 require_relative '../lib/lab42/tmux/auto_import'
 
-include T
+dry_run!
 
 # Use default config
 #

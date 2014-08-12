@@ -1,8 +1,6 @@
 
 require_relative '../lib/lab42/tmux/auto_import'
 
-include T
-
 # Use default config
 #
 

@@ -77,8 +77,7 @@ module Lab42
         end
 
         def run
-          raise Lab42::Tmux::NoSessionDefined, ["you need to define a session with `new_session` in your script",
-                                               "or did you forget to include Lab42::Tmux (Tmux or T) in your script?"].join( "\n" ) unless instance
+          raise Lab42::Tmux::NoSessionDefined, "you need to define a session with `new_session` in your script" unless instance
           instance.run
         end
       end # class <<
