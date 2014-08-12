@@ -9,7 +9,7 @@ module Lab42
       raise ArgumentError, 'No block provided' unless block
       session = Session.new session_name || Config.session_name
       session.define block if block
-      session.run!
+      session.run
     end
 
     def dry_run!

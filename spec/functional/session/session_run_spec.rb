@@ -11,7 +11,7 @@ describe T::Session do
       end
 
       it 'an empty session opens only one window' do
-        session.run
+        session.register_commands
         expect( session.commands.map(&join(' ')) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",
@@ -24,7 +24,7 @@ describe T::Session do
         session.define ->{
           new_window 'vi'
         }
-        session.run
+        session.register_commands
         expect( session.commands.map(&join( ' ' )) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",
@@ -40,7 +40,7 @@ describe T::Session do
           send_keys 'vi .'
           send_keys ':colorscheme morning'
         }
-        session.run
+        session.register_commands
         expect( session.commands.map(&join( ' ' )) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",

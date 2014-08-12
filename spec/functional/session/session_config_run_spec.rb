@@ -4,7 +4,7 @@ describe T::Session do
   context 'run' do 
     context 'with configured session' do
       let( :session_name ){ 'my-sess' }
-      let( :session ){ described_class.new session_name }
+      let!( :session ){ described_class.new session_name }
       
       before do
         stub_tmux_query session_name, false # as if the session does not exist
@@ -12,12 +12,11 @@ describe T::Session do
       end
 
       it 'an empty session without automatic rename off' do
+        session.register_commands
 
-        session.run
         expect( session.commands.map(&join(' ')) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",
-          # " set-window-option -g automatic-rename off",
           "attach-session -t #{session_name}" 
         ]
       end
@@ -26,7 +25,7 @@ describe T::Session do
         session.define ->{
           new_window 'vi'
         }
-        session.run
+        session.register_commands
         expect( session.commands.map(&join( ' ' )) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",
@@ -42,7 +41,7 @@ describe T::Session do
           send_keys 'vi .'
           send_keys ':colorscheme morning'
         }
-        session.run
+        session.register_commands
         expect( session.commands.map(&join( ' ' )) ).to eq [
           "source-file #{ENV["HOME"]}/.tmux.conf",
           "new-session -d -s #{session_name} -n sh",

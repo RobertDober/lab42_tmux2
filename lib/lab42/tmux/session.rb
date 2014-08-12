@@ -14,13 +14,15 @@ module Lab42
         @definition_block = block
       end
 
-      def run!
-        run
+      def run
+        register_commands
         run_registered_commands
       end
 
-      def run
-        create_session_and_windows unless running?
+      def register_commands
+        return attach if running?
+
+        create_session_and_windows
         instance_exec( &@definition_block ) if @definition_block
         attach
       end
