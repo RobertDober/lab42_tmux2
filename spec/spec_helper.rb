@@ -9,5 +9,6 @@ RSpec.configure do |c|
   c.filter_run_excluding slow: true
   c.filter_run_excluding next: true
   c.run_all_when_everything_filtered = true
+
 end
 
