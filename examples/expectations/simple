@@ -1,6 +1,5 @@
 has-session -t simple
-["source-file", "/home/robert/.tmux.conf"]
-["new-session", "-d", "-s", "simple", "-n", "sh"]
-["set-window-option", "-g", "automatic-rename", "off"]
-["attach-session", "-t", "simple"]
-has-session -t simple
+source-file /home/robert/.tmux.conf
+new-session -d -s simple -n sh
+set-window-option -g automatic-rename off
+attach-session -t simple

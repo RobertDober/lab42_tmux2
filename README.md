@@ -23,12 +23,11 @@ A simple API for launching tmux sessions from Ruby scripts
 ```ruby
     require 'lab42/tmux/autoimport'
 
-    configure do | c |
-      c.home '.'                  # Would have been the default
-      c.session_name = ARGV.first # Would have been the default
-    end
-
     session "vi_session" do
+      configure do | c |
+        c.home '.'                  # Would have been the default
+        c.session_name = ARGV.first # Would have been the default
+      end
       new_window 'vi' do
         send_keys 'vi .'
         wait_for '.. (up a dir)' # NERDTree pane has loaded

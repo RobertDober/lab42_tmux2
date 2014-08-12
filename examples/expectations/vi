@@ -1,6 +1,9 @@
+has-session -t vi
 source-file /home/robert/.tmux.conf
-new-session -d -s two -n sh
-new-window -t two -n vi
-send-keys -t two:1 \vi .\ C-m
-send-keys -t two:1 ":colorschem morning" C-m
-attach-session -t two
+new-session -d -s vi -n sh
+set-window-option -g automatic-rename off
+send-keys -t vi:0 "date" C-m
+new-window -t vi -n vi
+send-keys -t vi:1 "vi ." C-m
+send-keys -t vi:1 ":colorschem morning" C-m
+attach-session -t vi

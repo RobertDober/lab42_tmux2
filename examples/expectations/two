@@ -1,0 +1,6 @@
+has-session -t two
+source-file /home/robert/.tmux.conf
+new-session -d -s two -n sh
+set-window-option -g automatic-rename off
+new-window -t two -n vi
+attach-session -t two
