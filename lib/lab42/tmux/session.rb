@@ -1,5 +1,6 @@
 require_relative 'errors'
 require_relative 'session/commands'
+require_relative 'session/hooks'
 
 module Lab42
   module Tmux

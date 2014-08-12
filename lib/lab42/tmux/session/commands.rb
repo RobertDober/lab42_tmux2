@@ -7,6 +7,7 @@ module Lab42
         def new_window name
           @win_number += 1
           commands << %W{ new-window #{session_address} -n #{name} }
+          instance_exec( &@after_new_window_hook ) if @after_new_window_hook
           # TODO: Include after_new_window hoox
         end
 
