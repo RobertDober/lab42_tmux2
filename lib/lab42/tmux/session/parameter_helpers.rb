@@ -3,10 +3,10 @@ module Lab42
     class Session
       module ParameterHelpers
         def session_address
-          "-t #{name}"
+          "-t #{session_name}"
         end
         def window_address
-          "-t #{name}:#{win_number}"
+          "-t #{session_name}:#{win_number}"
         end
       end # module ParameterHelpers
       include ParameterHelpers

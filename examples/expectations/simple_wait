@@ -1,0 +1,8 @@
+has-session -t simpleWait
+source-file /home/robert/.tmux.conf
+new-session -d -s simpleWait -n sh
+set-window-option -g automatic-rename off
+capture-pane -t simpleWait:0 -p
+capture-pane -t simpleWait:0 -p
+send-keys -t simpleWait:0 "echo hello" C-m
+attach-session -t simpleWait

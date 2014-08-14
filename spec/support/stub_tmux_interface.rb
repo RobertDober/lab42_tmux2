@@ -1,25 +1,29 @@
 module CommandInterfaceStub
 
-  def output
-    @output ||= []
+  def set_interface_expectations *expectations
+    expectations.each do | expectation |
+      set_interface_expectation( *expectation )
+    end
   end
 
-  def stub_tmux_command
-    output.clear
-    o = output
-    class << T::Interface; self end.module_eval do
-      define_method :command do | *args |
-        o << args.join( ' ' )
-      end
+  def set_interface_expectation *expectation
+    if expectation.first.to_sym == :query
+      set_query_expectation( *expectation.drop( 1 ) )
+    elsif expectation.first.to_sym == :command
+      set_command_expectation( *expectation.drop( 1 ) )
+    # Allow the ugly default for command
+    else
+      set_command_expectation( *expectation )
     end
-    # allow( T::Interface ).to receive :command do |*args|
-    #   @output << args.join( ' ' )
-    # end
   end
   
+  def set_query_expectation *expectation
+    expect( Lab42::Tmux::Interface ).to receive( :query ).with( *expectation ).ordered.and_return false
+  end
 
-  def stub_tmux_query session, result
-    expect( T::Interface ).to receive( :query ).with( 'has-session', '-t', session ){ result }
+  # TODO: Allow last param to sepcify a return value (which defaults to '')
+  def set_command_expectation *expectation
+    expect( Lab42::Tmux::Interface ).to receive( :command ).with( *expectation ).ordered.and_return ''
   end
 end # module CommandInterfaceStub
   

@@ -2,36 +2,33 @@ require_relative 'errors'
 require_relative 'session/commands'
 require_relative 'session/hooks'
 
+require 'forwarder'
+
 module Lab42
   module Tmux
     class Session
-      attr_reader :commands, :configuration, :name, :win_number
+
+      attr_reader :commands, :configuration, :session_name, :window_number
+
+      extend Forwarder
+      forward :command, to_object: Interface
 
       def config &block
         block.( configuration )
       end
     
-      def define block
-        @definition_block = block
-      end
-
-      def run
-        register_commands
-        run_registered_commands
-      end
-
-      def register_commands
+      def run &block
         return attach if running?
-
-        create_session_and_windows
-        instance_exec( &@definition_block ) if @definition_block
+        create_session
+        instance_exec( &block )
         attach
       end
 
+
       private
       def initialize sess_name
-        @name = sess_name
-        @win_number = 0
+        @session_name = sess_name
+        @window_number = 0
         @commands = []
         @configuration = Config.new
 
@@ -39,21 +36,18 @@ module Lab42
       end
 
       def attach
-        add_command 'attach-session', '-t', name
+        command 'attach-session', '-t', session_name
       end
 
-      def add_command *args
-        commands << args
-      end
-
-      def create_session_and_windows
-        add_command 'source-file', File.join( ENV["HOME"], '.tmux.conf' )
-        add_command 'new-session', '-d', '-s', name, '-n', 'sh'
-        add_command 'set-window-option', '-g', 'automatic-rename', 'off' unless configuration.window_automatic_rename
+      def create_session
+        command 'source-file', File.join( ENV["HOME"], '.tmux.conf' )
+        # TODO: replace 'sh' with a configuration value
+        command 'new-session', '-d', '-s', session_name, '-n', 'sh'
+        command 'set-window-option', '-g', 'automatic-rename', 'off' unless configuration.window_automatic_rename
       end
 
       def running?
-        Interface.query 'has-session', '-t', name
+        Interface.query 'has-session', '-t', session_name
       end
 
       def run_command command
