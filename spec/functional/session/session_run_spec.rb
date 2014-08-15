@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe T::Session do 
   context 'run' do 
-    context 'with session', :wip do
+    context 'with session' do
       let( :session_name ){ 'my-sess' }
       let( :session ){ described_class.new session_name }
       
