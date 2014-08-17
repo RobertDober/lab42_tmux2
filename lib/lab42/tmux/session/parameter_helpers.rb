@@ -6,7 +6,7 @@ module Lab42
           "-t #{session_name}"
         end
         def window_address
-          "-t #{session_name}:#{win_number}"
+          "-t #{session_name}:#{window_number}"
         end
       end # module ParameterHelpers
       include ParameterHelpers

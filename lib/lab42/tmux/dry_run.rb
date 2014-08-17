@@ -4,17 +4,20 @@ module Lab42
     module Interface extend self
       def command *args
         puts args.join( ' ' )
-        return capture_pane( *args.drop( 1 ) ) if args.first == 'capture-pane'
       end
       def query *args
         puts args.join( ' ' )
-        args.first != 'has-session'
+        if args.first == 'capture-pane'
+          capture_pane( *args.drop( 1 ) )
+        else
+          args.first != 'has-session'
+        end
       end
 
       private
-      def cature_pane *args
+      def capture_pane *args
         pane_addr = args[1]
-        second_capture = (@panes ||= {})[pane-addr]
+        second_capture = (@panes ||= {})[pane_addr]
         if second_capture
           @panes[pane_addr] = false
           'hit'

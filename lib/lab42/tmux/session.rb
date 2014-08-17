@@ -11,7 +11,7 @@ module Lab42
       attr_reader :commands, :configuration, :session_name, :window_number
 
       extend Forwarder
-      forward :command, to_object: Interface
+      forward_all :command, :query, to_object: Interface
 
       def config &block
         block.( configuration )
