@@ -4,14 +4,13 @@ module Lab42
     module Interface extend self
       def command *args
         puts args.join( ' ' )
+        if args.first == 'capture-pane'
+          capture_pane( *args.drop( 1 ) )
+        end
       end
       def query *args
         puts args.join( ' ' )
-        if args.first == 'capture-pane'
-          capture_pane( *args.drop( 1 ) )
-        else
-          args.first != 'has-session'
-        end
+        args.first != 'has-session'
       end
 
       private

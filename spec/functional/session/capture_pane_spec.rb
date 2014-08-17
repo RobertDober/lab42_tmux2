@@ -12,8 +12,8 @@ describe T::Session do
           [:command, 'source-file', File.join(ENV["HOME"], '.tmux.conf')],
           [:command, 'new-session', '-d', '-s', session_name, '-n', 'sh'],
           [:command, 'set-window-option', '-g', 'automatic-rename', 'off'],
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: "this\nand some_text too\nand more" }], 
+          [:command, 'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
+          [:command, 'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: "this\nand some_text too\nand more" }], 
           [:command, 'send-keys','-t', [session_name, 0].join(':'), 'echo hello'.inspect, 'C-m'],
           [:command, 'attach-session', '-t', session_name]
         )
@@ -30,10 +30,10 @@ describe T::Session do
           [:command, 'source-file', File.join(ENV["HOME"], '.tmux.conf')],
           [:command, 'new-session', '-d', '-s', session_name, '-n', 'sh'],
           [:command, 'set-window-option', '-g', 'automatic-rename', 'off'],
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: "this\nand some_text too\nand more" }], 
+          [:command,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
+          [:command,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
+          [:command,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
+          [:command,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: "this\nand some_text too\nand more" }], 
           [:command, 'attach-session', '-t', session_name]
         )
         session.run do
@@ -49,9 +49,9 @@ describe T::Session do
           [:command, 'source-file', File.join(ENV["HOME"], '.tmux.conf')],
           [:command, 'new-session', '-d', '-s', session_name, '-n', 'sh'],
           [:command, 'set-window-option', '-g', 'automatic-rename', 'off'],
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
-          [:query,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
+          [:command,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
+          [:command,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
+          [:command,   'capture-pane', '-t', [session_name, 0].join(':'), '-p', {returns: ''}], 
           [:command, 'attach-session', '-t', session_name]
         )
         session.configuration.wait_interval 0.1

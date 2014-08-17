@@ -17,6 +17,7 @@ module Lab42
 
       define_setter_getters :pre_wait_interval, :post_wait_interval, :wait_interval, :wait_timeout
       define_setter_getters :session_name, :window_automatic_rename
+      define_setter_getters :verbose
 
       private
       def initialize

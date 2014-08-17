@@ -22,7 +22,7 @@ module Lab42
         def wait_for text_or_rgx, alternate_pane_addr=nil, &blk
           require 'timeout'
           pane_addr = alternate_pane_addr || window_address
-          text_or_rgx = %r{#{text_or_rgx}} unless Regexp === text_or_rgx
+          text_or_rgx = %r{#{text_or_rgx}}m unless Regexp === text_or_rgx
           conditional_sleep configuration.pre_wait_interval
           Timeout.timeout configuration.wait_timeout do
             really_wait_for text_or_rgx, in_pane: pane_addr, dependent_actions: blk
@@ -43,7 +43,9 @@ module Lab42
 
         private 
         def capture_pane pane_addr
-          query( 'capture-pane', *(pane_addr.split), '-p' ) 
+          command( 'capture-pane', *(pane_addr.split), '-p' ).tap  do |result  |
+            p result if $DEBUG
+          end
         end
         def conditional_sleep sleepy_or_falsy
           sleep sleepy_or_falsy if sleepy_or_falsy

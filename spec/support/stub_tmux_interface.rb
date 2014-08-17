@@ -28,7 +28,12 @@ module CommandInterfaceStub
 
   # TODO: Allow last param to sepcify a return value (which defaults to '')
   def set_command_expectation *expectation
-    expect( Lab42::Tmux::Interface ).to receive( :command ).with( *expectation ).ordered.and_return ''
+    return_value =
+      if Hash === expectation.last
+        expectation.pop
+      end
+    return_value &&= return_value.fetch :returns
+    expect( Lab42::Tmux::Interface ).to receive( :command ).with( *expectation ).ordered.and_return return_value
   end
 
   def stub_interface
