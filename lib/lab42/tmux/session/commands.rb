@@ -15,6 +15,10 @@ module Lab42
           command( 'send-keys', '-t', [session_name, window_number].join(':'), *keys.map(&:inspect), 'C-m' )
         end
 
+        def send_keys_raw *keys
+          command( 'send-keys', '-t', [session_name, window_number].join(':'), *keys.map(&:inspect) )
+        end
+
         def wait_for text_or_rgx, alternate_pane_addr=nil, &blk
           require 'timeout'
           pane_addr = alternate_pane_addr || window_address

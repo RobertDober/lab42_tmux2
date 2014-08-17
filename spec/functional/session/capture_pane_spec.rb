@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe T::Session do 
+describe T::Session do
   context 'run' do
-    context 'with wait_for' do
+    context 'with send keys' do
       let( :session_name ){ 'my-sess' }
       let( :session ){ described_class.new session_name }
       
