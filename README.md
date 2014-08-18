@@ -4,13 +4,13 @@
 ## Tmux2
 
 **N.B.** This is a complete rewrite of tmux and it is **not** compatible, IOW do not
-install both gems.
+install both gems, they even occupy the same namespace.
 
 These are the differences
 
 * Everything has changed.
 
-* Furthermore, nothing has remained the same
+* Furthermore, nothing has remained the same.
 
 * There are no predefined scripts, but have a look at the examples.
 
@@ -26,8 +26,6 @@ A simple API for launching tmux sessions from Ruby scripts
     session "vi_session" do
       new_window 'vi' do
         send_keys 'vi .'
-        wait_for '.. (up a dir)'       # NERDTree pane has loaded (not yet implemented)
-        send_keys_raw 'C-w', 'l'
       end
       new_window 'pry' do
         send_keys 'pry -Ilib'
@@ -53,7 +51,7 @@ A simple API for launching tmux sessions from Ruby scripts
 
 ### Hooks
 
-Add a `after_new_window` hook for tmux commands to be executed after the creation of a new
+Add an `after_new_window` hook for tmux commands to be executed after the creation of a new
 window.
 
 ```ruby
@@ -77,9 +75,9 @@ and only then switch to the right hand side split pane (of vi, not tmux).
 
     config
       # options for wait_for
-      pre_wait_interval 0.1  # Before checking for text
-      post_wait_interval 0.1 # After text has shown up in pane
-      wait_timeout 4         # Do not wait longer than that
+      pre_wait_interval 0.1  # Before checking for text in s, defaults to nil
+      post_wait_interval 0.1 # After text has shown up in pane, defaults to nil
+      wait_timeout 4         # Do not wait longer than that, defaults to 2s
 
       verbose true           # Talk to stdout for post mortem analyse
     end
