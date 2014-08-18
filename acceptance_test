@@ -10,7 +10,7 @@ function run_one_test
         test -r examples/$file_name || return
 
         echo "running $file_name"
-        ruby examples/$file_name > tmp/$test_name
+        bundle exec ruby examples/$file_name > tmp/$test_name
 
         # TODO: Provide a sexier diff and colorize
         if diff examples/expectations/${test_name} tmp/$test_name

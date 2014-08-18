@@ -30,7 +30,7 @@ module Lab42
         @session_name = sess_name
         @window_number = 0
         @commands = []
-        @configuration = Config.new
+        @configuration = $config || Config.new
 
         self.class.instance self
       end

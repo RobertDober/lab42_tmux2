@@ -1,0 +1,5 @@
+has-session -t two-window-rename
+source-file /home/robert/.tmux.conf
+new-session -d -s two-window-rename -n sh
+new-window -t two-window-rename -n vi
+attach-session -t two-window-rename
