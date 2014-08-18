@@ -1,5 +1,5 @@
 
-# Lab42, Programmers' Best Friend In Ruby 2
+# Lab42 Programmer's Best Friend In Ruby2
 
 ## Tmux2
 
