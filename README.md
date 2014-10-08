@@ -1,6 +1,9 @@
 
 # Lab42 Programmer's Best Friend In Ruby2
 
+
+[![Build Status](https://travis-ci.org/RobertDober/lab42_tmux2.svg?branch=master)](https://travis-ci.org/RobertDober/lab42_tmux2)
+
 ## Tmux2
 
 **N.B.** This is a complete rewrite of tmux and it is **not** compatible, IOW do not

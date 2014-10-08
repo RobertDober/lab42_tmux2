@@ -1,0 +1,17 @@
+branches:
+  only:
+    - master
+
+language: ruby
+rvm:
+  - "2.0.0"
+  - "2.1.2"
+
+install: 
+  - bundle install
+    # Assure order of files for qed
+  - touch demo/fordir/subdir/1
+script: 
+  - bundle exec rspec spec
+  - ./acceptance_test
+

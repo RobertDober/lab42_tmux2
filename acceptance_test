@@ -40,3 +40,5 @@ fi
 
 echo "----------------------------------------------------"
 echo "$error_count errors"
+
+test $error_count = 0
