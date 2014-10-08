@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.bindir      = "bin"
   s.files      += %w{LICENSE README.md}
   s.executables = Dir.glob("bin/*").map{ |f| f.sub(%r{bin/},"") }
-  s.homepage    = "https://github.com/RobertDober/lab42_tmux"
+  s.homepage    = "https://github.com/RobertDober/lab42_tmux2"
   s.licenses    = %w{MIT}
 
   s.required_ruby_version = '>= 2.1'
