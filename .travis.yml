@@ -12,5 +12,5 @@ install:
   - mkdir tmp || true
 script: 
   - bundle exec rspec spec
-  - ./acceptance_test
+  - HOME=/home/robert ./acceptance_test
 
