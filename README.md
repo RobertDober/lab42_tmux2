@@ -4,9 +4,9 @@
 
 [![Build Status](https://travis-ci.org/RobertDober/lab42_tmux2.svg?branch=master)](https://travis-ci.org/RobertDober/lab42_tmux2)
 
-## Tmux2
+## lab42_Tmux2
 
-**N.B.** This is a complete rewrite of tmux and it is **not** compatible, IOW do not
+**N.B.** This is a complete rewrite of lab42_tmux and it is **not** compatible, IOW do not
 install both gems, they even occupy the same namespace.
 
 These are the differences
@@ -37,6 +37,18 @@ A simple API for launching tmux sessions from Ruby scripts
     end
 ```
 
+If a session named `vi_session` exists this will simply attach to it, thus the script is protected  against multiple executions.
+
+Otherwise this will open a new tmux session named `vi_session` and do the following:
+
+* Source ~/.tmux.conf
+
+* Change every window to the directory in which this script resides (can be changed in a `config` block as shown below) 
+
+* execute commands for the default window or other windows as specified above
+
+For the time being this gem assumes you are not rebasing the window count in your config file.
+
 ### Configuration
 
 ```ruby
@@ -51,6 +63,20 @@ A simple API for launching tmux sessions from Ruby scripts
     end
 
 ```
+
+#### Configuration of `project_home`
+
+By default `project_home` will be set to the directory of the client script (aka `File.dirname $0`), this can be changed in two ways:
+
+```ruby
+    # ...
+    config do
+      project_home "/home/worxpace" # used instead of File.dirname $0
+      # or
+      project_home nil              # remain in dir in which client script was launched
+    end
+```
+
 
 ### Hooks
 
