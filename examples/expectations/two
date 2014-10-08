@@ -2,5 +2,7 @@ has-session -t two
 source-file /home/robert/.tmux.conf
 new-session -d -s two -n sh
 set-window-option -g automatic-rename off
+send-keys -t two:0 "cd examples" C-m
 new-window -t two -n vi
+send-keys -t two:1 "cd examples" C-m
 attach-session -t two

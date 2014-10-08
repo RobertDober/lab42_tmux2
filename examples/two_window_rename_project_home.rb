@@ -1,4 +1,3 @@
-
 require_relative '../lib/lab42/tmux/auto_import'
 
 dry_run!
@@ -11,6 +10,7 @@ dry_run!
 #
 config do
   window_automatic_rename true
+  project_home "/hello/world"
 end
 
 new_session 'two-window-rename' do

@@ -13,8 +13,10 @@ describe T::Session do
           [:command, 'source-file', File.join(ENV["HOME"], '.tmux.conf')],
           [:command, 'new-session', '-d', '-s', session_name, '-n', 'sh'],
           [:command, 'set-window-option', '-g', 'automatic-rename', 'off'],
+          [:command, 'send-keys', '-t', [session_name, 0].join(':'), "cd #{PROJECT_HOME}".inspect, 'C-m'],
           [:command, 'send-keys','-t', [session_name, 0].join(':'), 'echo hello'.inspect, 'C-m'],
           [:command, 'new-window','-t', session_name, '-n', 'win'],
+          [:command, 'send-keys', '-t', [session_name, 1].join(':'), "cd #{PROJECT_HOME}".inspect, 'C-m'],
           [:command, 'send-keys','-t', [session_name, 1].join(':'), 'echo hello_again'.inspect, 'C-m'],
           [:command, 'attach-session', '-t', session_name]
         )
@@ -32,8 +34,10 @@ describe T::Session do
           [:command, 'source-file', File.join(ENV["HOME"], '.tmux.conf')],
           [:command, 'new-session', '-d', '-s', session_name, '-n', 'sh'],
           [:command, 'set-window-option', '-g', 'automatic-rename', 'off'],
+          [:command, 'send-keys', '-t', [session_name, 0].join(':'), "cd #{PROJECT_HOME}".inspect, 'C-m'],
           [:command, 'send-keys','-t', [session_name, 0].join(':'), 'echo hello'.inspect],
           [:command, 'new-window','-t', session_name, '-n', 'win'],
+          [:command, 'send-keys', '-t', [session_name, 1].join(':'), "cd #{PROJECT_HOME}".inspect, 'C-m'],
           [:command, 'send-keys','-t', [session_name, 1].join(':'), 'echo hello_again'.inspect],
           [:command, 'attach-session', '-t', session_name]
         )

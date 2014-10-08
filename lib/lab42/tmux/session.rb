@@ -44,6 +44,7 @@ module Lab42
         # TODO: replace 'sh' with a configuration value
         command 'new-session', '-d', '-s', session_name, '-n', 'sh'
         command 'set-window-option', '-g', 'automatic-rename', 'off' unless configuration.window_automatic_rename
+        goto configuration.project_home
       end
 
       def running?

@@ -2,7 +2,9 @@ has-session -t after-window-hook
 source-file /home/robert/.tmux.conf
 new-session -d -s after-window-hook -n sh
 set-window-option -g automatic-rename off
+send-keys -t after-window-hook:0 "cd examples" C-m
 send-keys -t after-window-hook:0 "echo hook" C-m
 new-window -t after-window-hook -n vi
+send-keys -t after-window-hook:1 "cd examples" C-m
 send-keys -t after-window-hook:1 "echo hook" C-m
 attach-session -t after-window-hook

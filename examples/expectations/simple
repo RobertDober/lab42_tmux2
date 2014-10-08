@@ -2,4 +2,5 @@ has-session -t simple
 source-file /home/robert/.tmux.conf
 new-session -d -s simple -n sh
 set-window-option -g automatic-rename off
+send-keys -t simple:0 "cd examples" C-m
 attach-session -t simple

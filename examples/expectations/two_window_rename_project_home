@@ -1,7 +1,7 @@
 has-session -t two-window-rename
 source-file /home/robert/.tmux.conf
 new-session -d -s two-window-rename -n sh
-send-keys -t two-window-rename:0 "cd examples" C-m
+send-keys -t two-window-rename:0 "cd /hello/world" C-m
 new-window -t two-window-rename -n vi
-send-keys -t two-window-rename:1 "cd examples" C-m
+send-keys -t two-window-rename:1 "cd /hello/world" C-m
 attach-session -t two-window-rename

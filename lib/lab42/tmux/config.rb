@@ -16,13 +16,14 @@ module Lab42
       end
 
       define_setter_getters :pre_wait_interval, :post_wait_interval, :wait_interval, :wait_timeout
-      define_setter_getters :session_name, :window_automatic_rename
+      define_setter_getters :project_home, :session_name, :window_automatic_rename
       define_setter_getters :verbose
 
       private
       def initialize
         @wait_interval = 0.5
         @wait_timeout  = 2
+        @project_home  = File.dirname $0
       end
     end # module Config
   end # module Tmux

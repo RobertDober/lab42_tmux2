@@ -15,6 +15,7 @@ describe T::Session do
           [:query, 'has-session', '-t', session_name],
           [:command, 'source-file', File.join(ENV["HOME"], '.tmux.conf')],
           [:command, 'new-session', '-d', '-s', session_name, '-n', 'sh'],
+          [:command, 'send-keys', '-t', [session_name, 0].join(':'), "cd #{PROJECT_HOME}".inspect, 'C-m'],
           [:command, 'attach-session', '-t', session_name]
         )
         session.run do
@@ -26,10 +27,12 @@ describe T::Session do
           [:query, 'has-session', '-t', session_name],
           [:command, 'source-file', File.join(ENV["HOME"], '.tmux.conf')],
           [:command, 'new-session', '-d', '-s', session_name, '-n', 'sh'],
-          [:command, 'send-keys', '-t', [session_name,0].join(':'), 'echo hello'.inspect, 'C-m'],
+          [:command, 'send-keys', '-t', [session_name, 0].join(':'), "cd #{PROJECT_HOME}".inspect, 'C-m'],
+          [:command, 'send-keys', '-t', [session_name, 0].join(':'), 'echo hello'.inspect, 'C-m'],
           [:command, 'new-window', '-t', session_name, '-n', 'vi'],
-          [:command, 'send-keys', '-t', [session_name,1].join(':'), 'vi .'.inspect, 'C-m'],
-          [:command, 'send-keys', '-t', [session_name,1].join(':'), ':colorscheme morning'.inspect, 'C-m'],
+          [:command, 'send-keys', '-t', [session_name, 1].join(':'), "cd #{PROJECT_HOME}".inspect, 'C-m'],
+          [:command, 'send-keys', '-t', [session_name, 1].join(':'), 'vi .'.inspect, 'C-m'],
+          [:command, 'send-keys', '-t', [session_name, 1].join(':'), ':colorscheme morning'.inspect, 'C-m'],
           [:command, 'attach-session', '-t', session_name]
         )
         session.run do
