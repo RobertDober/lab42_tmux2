@@ -10,7 +10,6 @@ rvm:
 install: 
   - bundle install
     # Assure order of files for qed
-  - touch demo/fordir/subdir/1
 script: 
   - bundle exec rspec spec
   - ./acceptance_test
