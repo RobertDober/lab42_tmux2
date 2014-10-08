@@ -1,10 +1,11 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 function run_one_test
 {
         local test_name=${1}
         local file_name=${test_name:t}
-        test_name=${file_name:r}
+        file_name=${file_name/*\/}
+        test_name=${file_name%.rb}
         file_name=${test_name}.rb
 
         test -r examples/$file_name || return
