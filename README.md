@@ -3,6 +3,8 @@
 
 
 [![Build Status](https://travis-ci.org/RobertDober/lab42_tmux2.svg?branch=master)](https://travis-ci.org/RobertDober/lab42_tmux2)
+[![Code Climate](https://codeclimate.com/github/RobertDober/lab42_tmux2/badges/gpa.svg)](https://codeclimate.com/github/RobertDober/lab42_tmux2)
+[![Test Coverage](https://codeclimate.com/github/RobertDober/lab42_tmux2/badges/coverage.svg)](https://codeclimate.com/github/RobertDober/lab42_tmux2)
 
 ## lab42_Tmux2
 

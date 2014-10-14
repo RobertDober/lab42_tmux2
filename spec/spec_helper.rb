@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require_relative "../lib/lab42/tmux"
 T = Lab42::Tmux
 
