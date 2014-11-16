@@ -26,7 +26,7 @@ A simple API for launching tmux sessions from Ruby scripts
 ### A simple example
 
 ```ruby
-    require 'lab42/tmux/autoimport'
+    require 'lab42/tmux/auto_import'
 
     session "vi_session" do
       new_window 'vi' do
@@ -54,7 +54,7 @@ For the time being this gem assumes you are not rebasing the window count in you
 ### Configuration
 
 ```ruby
-    require 'lab42/tmux/autoimport'
+    require 'lab42/tmux/auto_import'
 
     config do
       window_automatic_rename true    # now there will be no `set-window-option -g automatic-rename off`
