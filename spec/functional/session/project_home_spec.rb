@@ -32,7 +32,7 @@ describe T::Session do
           [:command, 'new-session', '-d', '-s', session_name, '-n', 'sh'],
           [:command, 'set-window-option', '-g', 'automatic-rename', 'off'],
           [:command, 'send-keys', '-t', [session_name,0].join(':'), 'echo hook'.inspect, 'C-m'],
-          [:command, 'new-window', '-t', session_name, '-n', 'second'],
+          [:command, 'new-window', '-t', session_name, '-n', "'second'"],
           [:command, 'send-keys', '-t', [session_name,1].join(':'), 'echo hook'.inspect, 'C-m'],
           [:command, 'attach-session', '-t', session_name]
         )
@@ -71,7 +71,7 @@ describe T::Session do
           [:command, 'set-window-option', '-g', 'automatic-rename', 'off'],
           [:command, 'send-keys', '-t', [session_name, 0].join(':'), "cd #{project_dir}".inspect, 'C-m'],
           [:command, 'send-keys', '-t', [session_name,0].join(':'), 'echo hook'.inspect, 'C-m'],
-          [:command, 'new-window', '-t', session_name, '-n', 'second'],
+          [:command, 'new-window', '-t', session_name, '-n', "'second'"],
           [:command, 'send-keys', '-t', [session_name, 1].join(':'), "cd #{project_dir}".inspect, 'C-m'],
           [:command, 'send-keys', '-t', [session_name,1].join(':'), 'echo hook'.inspect, 'C-m'],
           [:command, 'attach-session', '-t', session_name]

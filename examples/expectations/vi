@@ -4,7 +4,7 @@ new-session -d -s vi -n sh
 set-window-option -g automatic-rename off
 send-keys -t vi:0 "cd examples" C-m
 send-keys -t vi:0 "date" C-m
-new-window -t vi -n vi
+new-window -t vi -n 'vi'
 send-keys -t vi:1 "cd examples" C-m
 send-keys -t vi:1 "vi ." C-m
 send-keys -t vi:1 ":colorschem morning" C-m

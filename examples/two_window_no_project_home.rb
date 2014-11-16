@@ -14,5 +14,5 @@ config do
 end
 
 new_session 'two-window-rename' do
-  new_window 'vi'
+  new_window 'vi window'
 end

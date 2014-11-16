@@ -10,7 +10,7 @@ module Lab42
         end
         def new_window window_name, &block
           @window_number += 1
-          command 'new-window', '-t', session_name, '-n', window_name
+          command 'new-window', '-t', session_name, '-n', "'#{window_name}'"
           goto configuration.project_home
           instance_exec( &@after_new_window_hook ) if @after_new_window_hook
           instance_exec( &block ) if block
