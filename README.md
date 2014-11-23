@@ -134,8 +134,55 @@ end
 Plugins are easy to write, just MP the `Lab42::Tmux::Session` class. However precise guidelines
 how to do this will be available soon, also you might want to create some configuration.
 
-The plugin guidelines and some plugins (vi, ruby, rvm, python's virtualenv) are planned for
-the near future.
+However, the goal of plugins being to be combineable the `lab42_tmux2` gem offers a mechanism to
+protect plugins from each other. This works as follows:
+
+#### A Vim Plugin
+
+##### Commands, The Easy One
+
+Instead of MPatching Lab42::Tmux::Session::Commands you just write your own module of commands, e.g.
+
+```ruby
+    require 'lab42/tmux/auto_import'
+    module VimCommands
+      def vim_window name, **options
+        new_window name do
+          send_keys "vi #{options.fetch :dir, '.'}"
+          if options[:nerdtree]
+            send_keys_raw 'C-w', 'l'
+          end
+        end
+      end
+    end
+```
+
+Now you _register_ the plugin via `Lab42::Tmux::Plugins.register VimCommands`, the benefit of doing this is, that
+the plugin will not overwrite other plugins that might have implemented  a `vim_window` command, and later plugins, that
+on their account want to define a `vim_window` command will not be able to overwite yours.
+
+##### Configuration, A Little Bit More Complicated
+
+**Not yet implemented c.f. Issues**
+
+Imagine, and it is quite useful as explained above, that whenever we use the plugin we want to have a changed default configuration.
+In our case we want to set a `pre_waint_interval` and a `post_wait_interval` by default. We could simply invoke
+`Lab42::Tmux::Session.config{ ... }` but we would be exposed to the same dangers as above, _breaking_ and _being broken_.
+
+Although conflicts might still arise, it is much saver to wrap our methods in a `with_config` block, that adds temporary configuration
+
+```ruby
+    # ...
+    def vim_window name, **options
+      # config.pre_wait_interval.nil?
+      with_config pre_wait_interval: 0.1 do
+        # config.pre_wait_interval == 0.1
+        # other config values are unchanged
+        # ...
+      end
+      # config.pre_wait_interval.nil?
+    end
+```
 
 ## Dev Notes
 

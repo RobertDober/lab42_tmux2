@@ -1,0 +1,11 @@
+has-session -t vimPlugin
+source-file /home/robert/.tmux.conf
+new-session -d -s vimPlugin -n sh
+set-window-option -g automatic-rename off
+send-keys -t vimPlugin:0 "cd examples" C-m
+new-window -t vimPlugin -n 'vim'
+send-keys -t vimPlugin:1 "cd examples" C-m
+send-keys -t vimPlugin:1 "vi there" C-m
+send-keys -t vimPlugin:1 ":source .vim" C-m
+send-keys -t vimPlugin:1 ":colorscheme blue" C-m
+attach-session -t vimPlugin

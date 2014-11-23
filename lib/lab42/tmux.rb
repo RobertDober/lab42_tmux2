@@ -1,6 +1,7 @@
 require_relative 'tmux/config'
 require_relative 'tmux/interface'
 require_relative 'tmux/session'
+require_relative 'tmux/plugins'
 
 module Lab42
   module Tmux

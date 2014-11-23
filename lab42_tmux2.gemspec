@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.1'
   # s.add_dependency 'lab42_options', '~> 0.4'
-  # s.add_dependency 'lab42_core', '~> 0.0.3'
+  s.add_dependency 'lab42_core', '~> 0.1.1'
   s.add_dependency 'forwarder2', '~> 0.2'
 
   s.add_development_dependency 'pry', '~> 0.9.12'
