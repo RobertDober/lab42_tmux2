@@ -131,8 +131,7 @@ end
 
 ### Plugins
 
-Plugins are easy to write, just MP the `Lab42::Tmux::Session` class. However precise guidelines
-how to do this will be available soon, also you might want to create some configuration.
+Plugins are easy to write, one could just MP the `Lab42::Tmux::Session` class.
 
 However, the goal of plugins being to be combineable the `lab42_tmux2` gem offers a mechanism to
 protect plugins from each other. This works as follows:

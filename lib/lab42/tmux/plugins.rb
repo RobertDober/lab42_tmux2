@@ -1,3 +1,4 @@
+require 'set'
 require_relative 'plugins/conflict'
 module Lab42
   module Tmux
