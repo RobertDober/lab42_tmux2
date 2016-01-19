@@ -1,0 +1,6 @@
+has-session -t world
+source-file /home/robert/.tmux.conf
+new-session -d -s world -n sh
+set-window-option -g automatic-rename off
+send-keys -t world:0 "cd examples" C-m
+attach-session -t world

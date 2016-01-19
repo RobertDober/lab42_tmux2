@@ -11,9 +11,9 @@ module Lab42
       $config.instance_exec( &block )
     end
 
-    def new_session session_name, &block
+    def new_session session_name=nil, &block
       raise ArgumentError, 'No block provided' unless block
-      session = Session.new session_name
+      session = Session.new( session_name || File.basename( ENV["PWD"] ) )
       session.run &block
     end
 

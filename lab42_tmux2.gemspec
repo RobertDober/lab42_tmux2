@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/RobertDober/lab42_tmux2"
   s.licenses    = %w{MIT}
 
-  s.required_ruby_version = '>= 2.1'
+  s.required_ruby_version = '>= 2.2'
   # s.add_dependency 'lab42_options', '~> 0.4'
   s.add_dependency 'lab42_core', '~> 0.1.1'
   s.add_dependency 'forwarder2', '~> 0.2'

@@ -7,7 +7,7 @@ describe T::Session do
     stub_tmux_command
     stub_tmux_query session_name, false # as if the session does not exist
   end
-  context 'define', :wip do
+  context 'define' do
     let( :title ){ 'window-title' }
     subject do
       described_class.new session_name
